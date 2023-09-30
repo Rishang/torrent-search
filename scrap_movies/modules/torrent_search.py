@@ -55,8 +55,6 @@ class TorrentSearch:
         self.search_results: list[TypeQuery] = []
 
     def search(self, text):
-        print(11111)
-
         def task(i):
             try:
                 print("searching: ", i)
