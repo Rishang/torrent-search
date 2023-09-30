@@ -6,7 +6,7 @@ from streamlit_searchbox import st_searchbox
 from scrap_movies.data import TypeQuery
 from scrap_movies.utils import get_google_suggestions
 
-st.set_page_config(layout="wide", page_title="Torrent Hunt 🦊")
+st.set_page_config(layout="wide", page_title="Torrent Hunt 🦊", page_icon='🐌')
 
 
 def search(searchterm: str) -> list:
