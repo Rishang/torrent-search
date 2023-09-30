@@ -4,7 +4,7 @@ from modules.torrent_search import TorrentSearch
 from streamlit_searchbox import st_searchbox
 
 from scrap_movies.data import TypeQuery
-from scrap_movies.utils import get_google_suggestions
+from scrap_movies.utils import get_google_suggestions, log
 
 st.set_page_config(layout="wide", page_title="Torrent Hunt 🦊", page_icon="🐌")
 
@@ -108,7 +108,7 @@ if search_result := selected_value:
             _d.write("\n")
             if r4.button("Open", key=i.title, type="primary"):
                 data = ts.describe(i)
-                print("Opening: magnet ")
+                log.info("Opening: magnet ")
                 components.html(
                     f"""
                     <script>

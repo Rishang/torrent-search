@@ -8,7 +8,7 @@ from lxml import etree
 import bs4.element
 from bs4 import BeautifulSoup
 
-from scrap_movies.utils import requests_session, clean_query
+from scrap_movies.utils import requests_session, clean_query, log
 
 headers = {
     "accept": "*/*",
@@ -102,7 +102,7 @@ class ModelTorrent:
                 )
                 return response
             except requests.exceptions.ConnectionError:
-                print(f"Connection Error: {url}")
+                log.error(f"Connection Error: {url}")
                 time.sleep(5)
                 # return self.request(url=url)
                 continue

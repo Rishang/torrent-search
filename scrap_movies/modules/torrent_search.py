@@ -4,7 +4,7 @@ import urllib.parse
 
 sys.path.append("..")
 
-from scrap_movies.utils import threads, sort_by_match
+from scrap_movies.utils import threads, sort_by_match, log
 from scrap_movies.data import TypeQuery, TypeTorrent, ModelTorrent
 from modules.sources import YtsMx, YtsMovie, X1337, KickAss, TDownloadInfo, PirateBay
 
@@ -57,24 +57,24 @@ class TorrentSearch:
     def search(self, text):
         def task(i):
             try:
-                print("searching: ", i)
+                log.info(f"searching: {i}")
                 model: TorrentSearch = self.models[i]
                 model.category = self.category
 
                 r = model.search(text)
-                print(i, len(r))
+                log.info(f"results: {i}, {len(r)}")
                 self.search_results.extend(r)
             except requests.exceptions.ReadTimeout:
-                print("timeout: ", i)
+                log.error(f"timeout: {i}")
                 ...
             except requests.exceptions.ConnectionError:
-                print("connection error: ", i)
+                log.error(f"connection error: {i}")
                 ...
             except IndexError:
-                print("index error: ", i)
+                log.error(f"index error: {i}")
                 ...
             except Exception as e:
-                print(f"error: {e} - {i}")
+                log.error(f"error: {e} - {i}")
                 ...
 
         threads(task, data=self.models.keys(), max_workers=10)
@@ -94,7 +94,7 @@ class TorrentSearch:
             except requests.exceptions.ReadTimeout:
                 return []
         else:
-            print(host)
+            log.debug(host)
             raise ValueError(f"Invalid URL: {url}")
 
     def sort(

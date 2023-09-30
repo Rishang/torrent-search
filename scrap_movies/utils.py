@@ -15,6 +15,42 @@ from rich import print as pprint
 
 requests_session = requests.Session()
 
+import logging
+import os
+from rich.logging import RichHandler
+
+
+def _logger(flag: str = "", format: str = ""):
+    if format == "" or format == None:
+        format = "%(levelname)s|%(name)s| %(message)s"
+
+    # message
+    logger = logging.getLogger(__name__)
+
+    if os.environ.get(flag) != None:
+        logger.setLevel(logging.DEBUG)
+    else:
+        logger.setLevel(logging.INFO)
+
+    # create console handler and set level to debug
+    # ch = logging.StreamHandler()
+    # ch.setLevel(logging.DEBUG)
+    # # create formatter
+    # # add formatter to ch
+    # formatter = logging.Formatter(format)
+    # ch.setFormatter(formatter)
+
+    # # add ch to logger
+    # logger.addHandler(ch)
+    handler = RichHandler()
+    logger.addHandler(handler)
+    return logger
+
+
+# message
+# export LOG_LEVEL=true
+log = _logger("LOG_LEVEL")
+
 
 def timing_decorator(f):
     @wraps(f)

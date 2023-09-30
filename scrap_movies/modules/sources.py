@@ -3,10 +3,10 @@ import urllib.parse
 
 
 from bs4 import BeautifulSoup
-from rich import print
+from lxml.etree import _Element
 
 from scrap_movies.data import ModelTorrent, TypeQuery, TypeTorrent
-from lxml.etree import _Element
+from scrap_movies.utils import log
 
 """
 YTS sources
@@ -42,7 +42,7 @@ class YtsMx(ModelTorrent):
 
             self.search_results = response.json()["data"]
         except KeyError as e:
-            print(e)
+            log.error(e)
             return []
 
         data = []
@@ -158,7 +158,7 @@ class X1337(ModelTorrent):
         )
 
         if len(search_result) == 0:
-            print(f"IndexError: {query} | {search_result}")
+            log.error(f"IndexError: {query} | {search_result}")
             return []
 
         data = []
@@ -210,7 +210,7 @@ class KickAss(ModelTorrent):
         )
 
         if not len(search_results) > 0:
-            print("IndexError: ", query)
+            log.error(f"IndexError: {query}")
             return []
 
         data = []
