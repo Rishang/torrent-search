@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "scrap-movies"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+packages = [{include = "scrap_movies"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+streamlit-searchbox = "^0.1.5"
+streamlit = "^1.27.1"
+prompt-toolkit = "^3.0.39"
+bs4 = "^0.0.1"
+requests = "^2.31.0"
+rich = "^13.5.3"
+rapidfuzz = "^3.3.1"
+types-requests = "^2.31.0.6"
+lxml = "^4.9.3"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.9.1"
+mypy = "^1.5.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
