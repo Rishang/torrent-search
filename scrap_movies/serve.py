@@ -105,6 +105,9 @@ def show_results(results: list[TypeQuery]):
 if search_button:
     with st.spinner("Wait for it... ⏳"):
         results_all = ts.search(selected_value)
+        st.write(
+            f"Results for: **{selected_value}** - Total results: {len(ts.search_results)}"
+        )
 
         col_ratios = (1, 10, 1, 2, 2)
         col0, col1, col2, col3, col4 = st.columns(col_ratios)
@@ -113,9 +116,6 @@ if search_button:
         col2.write("<b>📦</b>", unsafe_allow_html=True)
         col3.write("<b>🌱 / 🐌</b>", unsafe_allow_html=True)
         col4.write("<b>Magnet</b>", unsafe_allow_html=True)
-        st.write(
-            f"Results for: **{selected_value}** - Total results: {len(ts.search_results)}"
-        )
 
     results: list[TypeQuery] = ts.sort(
         selected_value,
