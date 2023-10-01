@@ -121,18 +121,21 @@ class TorrentSearch:
             query, search_results, obj_arg, self.banned_terms
         )
 
-        # sort by seeds and peers
-        d = []
-        n = []
+        return matches
 
-        for i in matches:
-            if i.seeds.isnumeric() and i.peers.isnumeric():
-                d.append(i)
-            elif "yts" in i._title_clean.lower():
-                n.append(i)
 
-        d = sorted(d, key=lambda x: (int(x.seeds), int(x.peers)), reverse=True)
-        c = n + d
-        # end of sort by seeds and peers
+# sort by seeds and peers
+def sort_by_seeds_and_peers(matches: list[TypeQuery]):
+    d = []
+    n = []
 
-        return c
+    for i in matches:
+        if i.seeds.isnumeric() and i.peers.isnumeric():
+            d.append(i)
+        elif "yts" in i._title_clean.lower():
+            n.append(i)
+
+    d = sorted(d, key=lambda x: (int(x.seeds), int(x.peers)), reverse=True)
+    c = n + d
+    # end of sort by seeds and peers
+    return c

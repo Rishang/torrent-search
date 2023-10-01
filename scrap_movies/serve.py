@@ -1,6 +1,6 @@
 import streamlit as st
 import streamlit.components.v1 as components
-from modules.torrent_search import TorrentSearch
+from modules.torrent_search import TorrentSearch, sort_by_seeds_and_peers
 from streamlit_searchbox import st_searchbox
 
 from scrap_movies.data import TypeQuery
@@ -68,7 +68,8 @@ if search_result := selected_value:
         if show_all:
             results = results_all
         else:
-            results = results[:10]
+            # results = results[:15]
+            results = sort_by_seeds_and_peers(results[:15])
 
         for c, i in enumerate(results):
             _d = st.container()
