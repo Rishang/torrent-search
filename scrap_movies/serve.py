@@ -66,7 +66,7 @@ if search_result := selected_value:
         )
 
         if show_all:
-            results_all
+            results = results_all
         else:
             results = results[:10]
 
