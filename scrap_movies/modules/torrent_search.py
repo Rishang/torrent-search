@@ -128,7 +128,7 @@ class TorrentSearch:
         for i in matches:
             if i.seeds.isnumeric() and i.peers.isnumeric():
                 d.append(i)
-            else:
+            elif "yts" in i._title_clean.lower():
                 n.append(i)
 
         d = sorted(d, key=lambda x: (int(x.seeds), int(x.peers)), reverse=True)
