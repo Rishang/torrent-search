@@ -117,4 +117,19 @@ class TorrentSearch:
             )
             or i.seeds == ""
         ]
-        return sort_by_match(query, search_results, obj_arg, self.banned_terms)
+        matches: list[TypeQuery] = sort_by_match(query, search_results, obj_arg, self.banned_terms)
+
+        # sort by seeds and peers        
+        d=[]
+        n=[]
+        for i in matches:
+            if i.seeds.isnumeric() and i.peers.isnumeric():
+                d.append(i)
+            else:
+                n.append(i)
+
+        d=sorted(d, key=lambda x: (int(x.seeds), int(x.peers)), reverse=True)
+        c=n+d
+        # end of sort by seeds and peers
+
+        return c
