@@ -33,16 +33,21 @@ ts = TorrentSearch(
 
 
 def highlight_words(text: str, words: list[str]) -> str:
+    text_words = text.split(" ")
     for word in words:
-        text = text.replace(
-            word.title(),
-            f'<span style="color:#cc7f27;font-weight: bold">{word.title()}</span>',
-        )
-        text = text.replace(
-            word, f'<span style="color:#cc7f27;font-weight: bold">{word}</span>'
-        )
+        for l in range(len(text_words)):
+            tw_title = text_words[l].title()
+            w_title = word.title()
+            if tw_title == w_title:
+                text_words[
+                    l
+                ] = f'<span style="color:#cc7f27;font-weight: bold">{w_title}</span>'
+            elif text_words[l] == word:
+                text_words[
+                    l
+                ] = f'<span style="color:#cc7f27;font-weight: bold">{word}</span>'
 
-    return text
+    return " ".join(text_words)
 
 
 if search_result := selected_value:
@@ -74,6 +79,7 @@ if search_result := selected_value:
         for c, i in enumerate(results):
             _d = st.container()
             r0, r1, r2, r3, r4 = _d.columns(col_ratios)
+            log.debug(f"Title {i.title}")
             r0.write(
                 f'<span style="color:#f59542;font-weight: bold">{c+1}.</span>',
                 unsafe_allow_html=True,
