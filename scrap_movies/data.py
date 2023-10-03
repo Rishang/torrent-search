@@ -91,8 +91,8 @@ class ModelTorrent:
         self.host = ""
         self.selected: TypeQuery | None = None
 
-        self.category = "movies"
-        self.available_categories: dict[str, str | None] = {"movies": None, "tv": None}
+        self.category = "movie"
+        self.available_categories: dict[str, str | None] = {"movie": None, "tv": None}
 
     def request(self, url, headers=headers, timeout=15, retry=5, params={}):
         for _ in range(retry):

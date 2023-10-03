@@ -28,7 +28,7 @@ with sr_col1:
 show_all = st.checkbox("Show all results")
 
 ts = TorrentSearch(
-    category=st.radio("**Select category**", ["Movies", "TV"], horizontal=True).lower()
+    category=st.radio("**Select category**", ["Movie", "TV"], horizontal=True).lower()
 )
 
 

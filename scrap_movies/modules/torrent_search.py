@@ -29,7 +29,7 @@ banned_terms = (
 
 
 class TorrentSearch:
-    def __init__(self, category="movies"):
+    def __init__(self, category="movie"):
         _YtsMx = YtsMx()
         _YtsMovie = YtsMovie()
         _X1337 = X1337()

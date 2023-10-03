@@ -26,7 +26,7 @@ class YtsMx(ModelTorrent):
     def __init__(self, host=sources["yts"]) -> None:
         super().__init__()
         self.host = host
-        self.available_categories["movies"] = "ajax/search"
+        self.available_categories["movie"] = "ajax/search"
 
     def pre_search(self, query: str) -> list[TypeQuery]:
         endpoint = self.__search_url__(query)
@@ -87,7 +87,7 @@ class YtsMovie(ModelTorrent):
     def __init__(self, host=sources["ytsmovie"]) -> None:
         super().__init__()
         self.host = host
-        self.available_categories["movies"] = "?s={query}"
+        self.available_categories["movie"] = "?s={query}"
         self.available_categories["tv"] = "?s={query}"
 
     def pre_search(self, query: str) -> list[TypeQuery]:
@@ -148,7 +148,7 @@ class X1337(ModelTorrent):
     def __init__(self, host=sources["1337x"]) -> None:
         super().__init__()
         self.host = host
-        self.available_categories["movies"] = "category-search/{query}/Movies/1/"
+        self.available_categories["movie"] = "category-search/{query}/Movies/1/"
         self.available_categories["tv"] = "category-search/{query}/TV/1/"
 
     def pre_search(self, query: str) -> list[TypeQuery]:
@@ -200,7 +200,7 @@ class KickAss(ModelTorrent):
     def __init__(self, host=sources["kickass"]) -> None:
         super().__init__()
         self.host = host
-        self.available_categories["movies"] = "usearch/{query}%20category:movies/"
+        self.available_categories["movie"] = "usearch/{query}%20category:movies/"
         self.available_categories["tv"] = "usearch/{query}%20category:tv/"
 
     def pre_search(self, query: str) -> list[TypeQuery]:
@@ -256,7 +256,7 @@ class TDownloadInfo(ModelTorrent):
     def __init__(self, host=sources["torrentdownload"]) -> None:
         super().__init__()
         self.host = host
-        self.available_categories["movies"] = "feed?q={query}"
+        self.available_categories["movie"] = "feed?q={query}"
         self.available_categories["tv"] = "feed?q={query}"
 
     def pre_search(self, query: str) -> list[TypeQuery]:
@@ -301,7 +301,7 @@ class PirateBay(ModelTorrent):
     def __init__(self, host=sources["piratebay"]) -> None:
         super().__init__()
         self.host = host
-        self.available_categories["movies"] = "search/{query}"
+        self.available_categories["movie"] = "search/{query}"
         self.available_categories["tv"] = "search/{query}"
 
     def pre_search(self, query: str) -> list[TypeQuery]:
@@ -339,7 +339,7 @@ class PirateBay(ModelTorrent):
 
             if (
                 category in ["video - hd - movies", "video - movies"]
-                and self.category == "movies"
+                and self.category == "movie"
             ):
                 data.append(obj)
                 # print(category, title)

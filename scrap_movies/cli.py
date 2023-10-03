@@ -13,7 +13,7 @@ from scrap_movies.utils import (
 
 import sys
 
-CATEGORY = sys.argv[1] if len(sys.argv) > 1 else "movies"
+CATEGORY = sys.argv[1] if len(sys.argv) > 1 else "movie"
 
 TMP_DIR = "tmp"
 os.makedirs(TMP_DIR, exist_ok=True)
