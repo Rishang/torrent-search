@@ -13,7 +13,7 @@ def search(searchterm: str) -> list:
     return get_google_suggestions(searchterm) if searchterm else []
 
 
-"""Search for a **Movie** 🎥 or **TV** show 📺 to Download"""
+"""Search for a **Movie** 🎥 / **TV** show 📺 / **Book** 📖 - to Download"""
 sr_col1, sr_col2 = st.columns([5, 1])
 
 with sr_col1:
