@@ -1,10 +1,8 @@
 import re
 import time
-import difflib
 import platform
 import subprocess
 import string
-from urllib import parse
 from functools import wraps
 from concurrent.futures import ThreadPoolExecutor
 

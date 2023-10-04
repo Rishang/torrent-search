@@ -1,8 +1,5 @@
-import sys
 import requests
 import urllib.parse
-
-sys.path.append("..")
 
 from scrap_movies.utils import threads, sort_by_match, log
 from scrap_movies.data import TypeQuery, TypeTorrent, ModelTorrent
