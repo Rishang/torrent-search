@@ -8,8 +8,6 @@ from scrap_movies.utils import threads, sort_by_match, log
 from scrap_movies.data import TypeQuery, TypeTorrent, ModelTorrent
 from modules.sources import YtsMx, YtsMovie, X1337, KickAss, TDownloadInfo, PirateBay
 
-from rich import print
-
 banned_terms = (
     "hdcam",
     "hd cam",
@@ -45,7 +43,7 @@ class TorrentSearch:
             _X1337.host: _X1337,
             _KickAss.host: _KickAss,
             _PirateBay.host: _PirateBay,
-            # _TDownloadInfo.host: _TDownloadInfo,  # download not working
+            _TDownloadInfo.host: _TDownloadInfo,  # download not working
         }
 
         self.banned_terms = banned_terms
@@ -84,6 +82,7 @@ class TorrentSearch:
 
     def describe(self, selected: TypeQuery) -> list[TypeTorrent]:
         ModelTorrent.describe(self=ModelTorrent, selected=selected)  # type: ignore
+        log.info(f"describe: {selected}")
 
         url = selected.url
         host = "https://" + urllib.parse.urlparse(url).hostname

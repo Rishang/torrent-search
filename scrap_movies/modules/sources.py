@@ -202,6 +202,7 @@ class KickAss(ModelTorrent):
         self.host = host
         self.available_categories["movie"] = "usearch/{query}%20category:movies/"
         self.available_categories["tv"] = "usearch/{query}%20category:tv/"
+        self.available_categories["book"] = "usearch/{query}%20category:books/"
 
     def pre_search(self, query: str) -> list[TypeQuery]:
         search_results = self.find_dom_xpath(
@@ -303,6 +304,7 @@ class PirateBay(ModelTorrent):
         self.host = host
         self.available_categories["movie"] = "search/{query}"
         self.available_categories["tv"] = "search/{query}"
+        self.available_categories["book"] = "search/{query}"
 
     def pre_search(self, query: str) -> list[TypeQuery]:
         search_results = self.find_dom_jspath(self.__search_url__(query), "tr")[1:]
@@ -314,6 +316,7 @@ class PirateBay(ModelTorrent):
                     [i.text.strip() for i in item.select("td.vertTh > center > a")]
                 ).lower()
                 _a = item.select_one("td div a")
+                log.debug(f"Title: {_a.text}, category: {category}")
                 title = _a.text
             except:
                 continue
@@ -349,7 +352,12 @@ class PirateBay(ModelTorrent):
             ):
                 # print(category, title)
                 data.append(obj)
-
+            elif (
+                category in ["other - e-books", "audio - audio books"]
+                and self.category == "book"
+            ):
+                # print(category, title)
+                data.append(obj)
         return data
 
     def describe(self, selected: TypeQuery) -> list[TypeTorrent]:

@@ -15,6 +15,7 @@ def search(searchterm: str) -> list:
 
 """Search for a **Movie** 🎥 or **TV** show 📺 to Download"""
 sr_col1, sr_col2 = st.columns([5, 1])
+
 with sr_col1:
     selected_value = st_searchbox(
         search,
@@ -28,7 +29,9 @@ with sr_col1:
 show_all = st.checkbox("Show all results")
 
 ts = TorrentSearch(
-    category=st.radio("**Select category**", ["Movie", "TV"], horizontal=True).lower()
+    category=st.radio(
+        "**Select category**", ["Movie", "TV", "Book"], horizontal=True
+    ).lower()
 )
 
 
@@ -54,7 +57,8 @@ if search_result := selected_value:
     with st.spinner("Wait for it... ⏳"):
         results_all = ts.search(selected_value)
         st.write(
-            f"Results for: **{selected_value}** - Total results: {len(ts.search_results)}"
+            f"Results for: <b>{selected_value}</b> - <span style='color:#52dec7'>Total results: <b>{len(ts.search_results)}</b> </span>",
+            unsafe_allow_html=True,
         )
 
         col_ratios = (1, 10, 1, 2, 2)
@@ -79,7 +83,7 @@ if search_result := selected_value:
         for c, i in enumerate(results):
             _d = st.container()
             r0, r1, r2, r3, r4 = _d.columns(col_ratios)
-            log.debug(f"Title {i.title}")
+            log.debug(f"Obj {i}")
             r0.write(
                 f'<span style="color:#f59542;font-weight: bold">{c+1}.</span>',
                 unsafe_allow_html=True,

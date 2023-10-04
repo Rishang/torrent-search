@@ -92,7 +92,11 @@ class ModelTorrent:
         self.selected: TypeQuery | None = None
 
         self.category = "movie"
-        self.available_categories: dict[str, str | None] = {"movie": None, "tv": None}
+        self.available_categories: dict[str, str | None] = {
+            "movie": None,
+            "tv": None,
+            "book": None,
+        }
 
     def request(self, url, headers=headers, timeout=15, retry=5, params={}):
         for _ in range(retry):
@@ -111,7 +115,9 @@ class ModelTorrent:
 
     @final
     def search(self, query: str) -> list[TypeQuery]:
-        query = urllib.parse.quote_plus(query)
+        query = urllib.parse.quote(query)
+        log.debug(f"Searching: {query}")
+
         result = self.pre_search(query=query)
 
         if len(result) != 0:
