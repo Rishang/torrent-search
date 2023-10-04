@@ -21,6 +21,7 @@ lxml = "^4.9.3"
 [tool.poetry.group.dev.dependencies]
 black = "^23.9.1"
 mypy = "^1.5.1"
+types-requests = "*"
 
 [build-system]
 requires = ["poetry-core"]
