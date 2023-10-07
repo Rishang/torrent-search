@@ -92,6 +92,8 @@ class ModelTorrent:
         self.selected: TypeQuery | None = None
 
         self.category = "movie"
+
+        # category: "search url slug"
         self.available_categories: dict[str, str | None] = {
             "movie": None,
             "tv": None,
