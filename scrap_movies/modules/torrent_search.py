@@ -60,11 +60,13 @@ class TorrentSearch:
         def task(i):
             try:
                 log.info(f"query: {i}")
-                i = self.filter_query(i)
                 log.info(f"searching: {i}")
                 model: TorrentSearch = self.models[i]
                 model.category = self.category
 
+                log.info(f"filtering: {text}")
+                text = self.filter_query(text)
+                log.info(f"text: {text}")
                 r = model.search(text)
                 log.info(f"results: {i}, {len(r)}")
                 self.search_results.extend(r)
