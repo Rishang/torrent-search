@@ -20,6 +20,7 @@ with sr_col1:
     selected_value = st_searchbox(
         search,
         key="wiki_searchbox",
+        rerun_on_update=False,
     )
 
 
