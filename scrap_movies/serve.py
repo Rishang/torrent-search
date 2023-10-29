@@ -55,6 +55,7 @@ def highlight_words(text: str, words: list[str]) -> str:
 
 if search_result := selected_value:
     with st.spinner("Wait for it... ⏳"):
+        selected_value = ts.filter_query(selected_value)
         results_all = ts.search(selected_value)
         st.write(
             f"Results for: <b>{selected_value}</b> - <span style='color:#52dec7'>Total results: <b>{len(ts.search_results)}</b> </span>",
