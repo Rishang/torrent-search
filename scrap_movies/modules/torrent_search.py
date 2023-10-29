@@ -48,10 +48,19 @@ class TorrentSearch:
         self.category = category
 
         self.search_results: list[TypeQuery] = []
+        self.ignore_query_terms = ("cast", "casts", "reviews", "watch online", "watch online free", "imdb", "download")
+
+    def filter_query(self, query: str) -> str:
+        """Remove unwanted terms from query"""
+        for i in self.ignore_query_terms:
+            query = query.replace(i, "")
+        return query
 
     def search(self, text):
         def task(i):
             try:
+                log.info(f"query: {i}")
+                i = self.filter_query(i)
                 log.info(f"searching: {i}")
                 model: TorrentSearch = self.models[i]
                 model.category = self.category
