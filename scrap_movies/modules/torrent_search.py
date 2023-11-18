@@ -57,6 +57,9 @@ class TorrentSearch:
             "watch online free",
             "imdb",
             "download",
+            "movie",
+            "stream",
+            "online",
         )
 
     def filter_query(self, query: str) -> str:
