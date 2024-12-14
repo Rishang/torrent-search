@@ -20,6 +20,7 @@ banned_terms = (
     "hqcam",
     "qrip",
     "qrips",
+    "telesync",
 )
 
 
